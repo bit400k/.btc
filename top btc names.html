@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.btc | Secure, Permanent Blockchain Identity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔗</text></svg>">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --card-hover: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b7c3;
+            --accent-primary: #f7931a; /* Bitcoin orange */
+            --accent-primary-hover: #f9aa4b; /* Lighter orange */
+            --accent-secondary: #8c5400; /* Darker orange */
+            --accent-secondary-hover: #a36200;
+            --accent-tertiary: #d97400;
+            --accent-tertiary-hover: #bf6500;
+            --accent-gold: #f3c45a;
+            --accent-silver: #b0b7c3;
+            --border-radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --section-spacing: 100px;
+            --header-height: 80px;
+            --glow-primary: 0 0 15px rgba(247, 147, 26, 0.2); /* Orange glow */
+            --glow-gold: 0 0 15px rgba(243, 196, 90, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(18, 18, 18, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231e1e1e' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            height: var(--header-height);
+            border-bottom: 1px solid rgba(247, 147, 26, 0.1);
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff; /* Changed to white */
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(176, 183, 195, 0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: #000;
+            box-shadow: var(--glow-primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(247, 147, 26, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-primary);
+            border: 1px solid rgba(247, 147, 26, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(247, 147, 26, 0.1);
+            box-shadow: var(--glow-gold);
+            transform: translateY(-2px);
+        }
+        
+        .btn-tertiary {
+            background: var(--accent-tertiary);
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px rgba(217, 116, 0, 0.2);
+        }
+        
+        .btn-tertiary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(217, 116, 0, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(247, 147, 26, 0.05) 0%, transparent 70%);
+            z-index: -1;
+            animation: rotate 30s linear infinite;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 58px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 19px;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-value {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 5px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 15px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 650px;
+            z-index: 1;
+            opacity: 0.7;
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        /* Sections */
+        section {
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-header h2 {
+            font-size: 44px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 17px;
+        }
+        
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .benefit-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(247, 147, 26, 0.2);
+            background: var(--card-hover);
+        }
+        
+        .benefit-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(176, 183, 195, 0.1));
+            color: var(--accent-primary);
+        }
+        
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        /* Use Cases */
+        .use-cases-container {
+            position: relative;
+            padding: 50px 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .use-cases-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.9), rgba(10, 10, 10, 0.95));
+            z-index: -1;
+        }
+        
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .use-case-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px 25px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(247, 147, 26, 0.2);
+            background: var(--card-hover);
+        }
+        
+        .use-case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-silver));
+        }
+        
+        .use-case-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .use-case-card h3 i {
+            color: var(--accent-primary);
+        }
+        
+        .use-case-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        /* Comparison */
+        .comparison-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .comparison-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(247, 147, 26, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            animation: rotate 30s linear infinite;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .comparison-table th {
+            background-color: rgba(30, 30, 30, 0.7);
+            font-weight: 600;
+            font-size: 17px;
+            color: var(--accent-primary);
+        }
+        
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .feature-cell {
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .advantage {
+            color: var(--accent-primary);
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .advantage::after {
+            content: '✓';
+            margin-left: 6px;
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Marketplace & Inscribe */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        /* NEW: 5-column grid for specific sections */
+        #inscribe .platform-grid,
+        #community .platform-grid {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        
+        .platform-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px 25px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(247, 147, 26, 0.2);
+            background: var(--card-hover);
+        }
+        
+        .platform-logo {
+            height: 75px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .platform-logo i {
+            font-size: 55px;
+            color: var(--accent-primary);
+        }
+        
+        .platform-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .platform-card p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(247, 147, 26, 0.2);
+            background: var(--card-hover);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 25px;
+            font-size: 17px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 0;
+            font-size: 70px;
+            color: rgba(247, 147, 26, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-silver));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            color: var(--bg-darker);
+        }
+        
+        .author-info {
+            text-align: left;
+        }
+        
+        .author-info strong {
+            font-size: 17px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .author-info span {
+            color: var(--accent-primary);
+            font-size: 15px;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(247, 147, 26, 0.1);
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            font-size: 19px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            color: var(--accent-primary);
+        }
+        
+        .faq-answer {
+            padding: 0 25px 25px;
+            color: var(--text-secondary);
+            display: none;
+            font-size: 16px;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-toggle {
+            font-size: 22px;
+            transition: transform 0.4s ease;
+            color: var(--accent-primary);
+            min-width: 28px;
+            text-align: center;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 70px 0 30px;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 19px;
+            margin-bottom: 20px;
+            color: var(--accent-primary);
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a i {
+            color: var(--accent-primary);
+            width: 18px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-primary);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(247, 147, 26, 0.1);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-53%) translateX(8px); }
+            100% { transform: translateY(-50%) translateX(0); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Marketplace Grid */
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+        
+        .marketplace-grid .platform-card {
+            padding: 20px 15px;
+        }
+        
+        .marketplace-grid .platform-logo {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .marketplace-grid .platform-logo i {
+            font-size: 40px;
+        }
+        
+        .marketplace-grid .platform-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .marketplace-grid .platform-card p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .marketplace-grid .btn {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 50px;
+            }
+            
+            .hero-image {
+                opacity: 0.3;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .marketplace-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            /* Adjust 5-column grid for medium screens */
+            #inscribe .platform-grid,
+            #community .platform-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero {
+                text-align: center;
+                padding-top: 140px;
+            }
+            
+            .hero-content {
+                margin: 0 auto;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg-dark);
+                flex-direction: column;
+                padding: 25px;
+                gap: 15px;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                align-items: center;
+            }
+            
+            nav.active ul {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-buttons {
+                display: none;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .marketplace-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Adjust 5-column grid for tablets */
+            #inscribe .platform-grid,
+            #community .platform-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero h1 {
+                font-size: 38px;
+            }
+            
+            .hero p {
+                font-size: 17px;
+            }
+            
+            .section-header h2 {
+                font-size: 34px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-value {
+                font-size: 34px;
+            }
+            
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-container {
+                padding: 25px 15px;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 8px;
+                font-size: 13px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .marketplace-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Adjust 5-column grid for mobile */
+            #inscribe .platform-grid,
+            #community .platform-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .section-header h2 {
+                font-size: 30px;
+            }
+            
+            .stat-value {
+                font-size: 26px;
+            }
+            
+            .stat-label {
+                font-size: 13px;
+            }
+            
+            .benefit-card, .platform-card, .testimonial-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span>.btc</span>
+            </a>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#history" class="active">History</a></li>
+                    <li><a href="#value">Value</a></li>
+                    <li><a href="#setup">Setup</a></li>
+                    <li><a href="#primary">Primary Name</a></li>
+                    <li><a href="#sixd-meta">6D Meta</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#marketplaces">Marketplaces</a></li>
+                </ul>
+            </nav>
+            <div class="header-buttons">
+                <a href="#marketplaces" class="btn btn-secondary">Get Started</a>
+                <a href="#inscribe" class="btn btn-primary">Inscribe Now</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Secure Your Digital Identity on Bitcoin</h1>
+                <p>Built on Bitcoin's blockchain with Ordinals—permanent, decentralized, and truly owned .btc domains</p>
+                
+                <div class="hero-buttons">
+                    <a href="#marketplaces" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> Buy Your Domain
+                    </a>
+                    <a href="#inscribe" class="btn btn-secondary">
+                        <i class="fas fa-pen"></i> Inscribe Now
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">1.94M+</div>
+                        <div class="stat-label">Domains Registered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$150M+</div>
+                        <div class="stat-label">Market Value</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">141K+</div>
+                        <div class="stat-label">Holders</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#121212" d="M734.7 407.5c-39.8-15.5-81.7-11.4-116.8 10.6-35.1 22-60.9 58.8-69.9 101.1-9 42.3 0 86.5 24.3 119.4 24.3 32.9 60.6 50.5 98.7 51.8 38.1 1.3 77.3-14.2 105.9-40.1 28.6-25.9 44.7-60.6 44.7-97.1 0-36.5-16.1-71.2-44.7-97.1-28.6-25.9-67.8-41.4-105.9-40.1-38.1 1.3-74.4 18.9-98.7 51.8-24.3 32.9-33.3 77.1-24.3 119.4 9 42.3 34.8 79.1 69.9 101.1 35.1 22 77 26.1 116.8 10.6" opacity=".5"/>
+                    <path fill="#f7931a" d="M618.2 362.7c-42.8-16.7-87.8-12.3-125.6 11.4-37.8 23.7-65.5 63.3-75.2 108.8-9.7 45.5-.1 93.1 26.2 128.5 26.2 35.4 65.2 54.3 106.3 55.7 41.1 1.4 83.3-15.3 114.1-43.1 30.8-27.9 48.1-65.2 48.1-104.5 0-39.3-17.3-76.6-48.1-104.5-30.8-27.9-73-44.6-114.1-43.1-41.1 1.4-80.1 20.3-106.3 55.7-26.2 35.4-35.8 83-26.2 128.5 9.6 45.5 37.4 85.1 75.2 108.8 37.8 23.7 82.8 28.1 125.6 11.4" opacity=".7"/>
+                    <circle cx="555" cy="420" r="120" fill="url(#gradient)" opacity=".8"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#f7931a"/>
+                            <stop offset="100%" stop-color="#f9aa4b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history">
+        <div class="container">
+            <div class="section-header">
+                <h2>The History of .btc Domains</h2>
+                <p>From early concepts to the Ordinals revolution</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Early Concepts</h3>
+                    <p>Over a decade ago, the Bitcoin community proposed domain solutions but faced technical limitations.</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Fragmented Ecosystem</h3>
+                    <p>Many projects use .btc without rights because they are not on-chain on Bitcoin and do not serve the true purpose.</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Ordinals Revolution</h3>
+                    <p>In 2023, Ordinals enabled true decentralized .btc domains on Bitcoin's mainnet.</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Community Adoption</h3>
+                    <p>Early inscriptions like "godoftunder.btc" (#18681) sparked massive community adoption.</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>First 6D Minted Out</h3>
+                    <p>.btc became the first decentralized identity system on Bitcoin, with 6D domains minted out.</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Record Growth</h3>
+                    <p>Nearly 2 million domains registered, surpassing ENS and becoming the most used blockchain naming system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section id="value" style="background-color: rgba(30,30,30,0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Value of .btc Domains</h2>
+                <p>Why .btc domains are revolutionizing digital identity</p>
+            </div>
+            
+            <div class="use-cases-grid">
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-shield-alt"></i> Decentralized Ownership</h3>
+                    <p>Truly own your domain without intermediaries or central authorities</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-infinity"></i> Permanent Identity</h3>
+                    <p>Once inscribed, your domain exists forever on Bitcoin's blockchain</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-globe"></i> Censorship Resistance</h3>
+                    <p>Impossible to take down or alter by any external force</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-gem"></i> Digital Scarcity</h3>
+                    <p>Each domain is unique and irreplaceable, creating true digital scarcity</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-link"></i> Resolution System</h3>
+                    <p>Bind your domain to addresses, content, and identities</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-sync-alt"></i> Inspired BRC-20</h3>
+                    <p>The .sats format inspired the creation of the BRC-20 token standard</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-rocket"></i> Ecosystem Growth</h3>
+                    <p>Over 150+ integrated applications and services</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-lock"></i> Enhanced Security</h3>
+                    <p>Leverages Bitcoin's unmatched security for domain integrity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup">
+        <div class="container">
+            <div class="section-header">
+                <h2>Set Up Your .btc Domain</h2>
+                <p>Configure your domain with routing and reverse resolution</p>
+            </div>
+            
+            <div class="comparison-container">
+                <div class="section-header">
+                    <h3>Routing Inscription Format</h3>
+                    <p>Configure your domain to point to various addresses and content</p>
+                </div>
+                
+                <pre style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: var(--border-radius); color: var(--accent-primary); margin: 30px 0; overflow-x: auto;">
+{
+    "p":"btcname",
+    "op":"routing",
+    "name":"xxx.btc",
+    "ord_handle":"xxx",
+    "ord_index":"xxxi0",
+    "btc_p2phk":"1xxx",
+    "btc_p2sh":"3xxx",
+    "btc_segwit":"bc1qxxx",
+    "btc_lightning":"xxx",
+    "eth_address":"0xxxx",
+    "matic_address":"0xxxx",
+    "sol_address":"xxx",
+    "avatar":"xxxi0"
+}</pre>
+                
+                <div class="cta-container">
+                    <a href="#inscribe" class="btn btn-tertiary">
+                        <i class="fas fa-code"></i> Create Routing Inscription
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Primary Name Protocol -->
+    <section id="primary" style="background-color: rgba(30,30,30,0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Primary Name Protocol</h2>
+                <p>Display a readable name for Bitcoin addresses</p>
+            </div>
+            
+            <div class="platform-grid">
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-signature"></i>
+                    </div>
+                    <h3>Solution A: Update Operation</h3>
+                    <p>Inscribe a primary-name record to update your displayed name</p>
+                    <a href="#inscribe" class="btn btn-secondary">Learn More</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Solution B: Transfer Operation</h3>
+                    <p>Transfer a domain to yourself to set it as your primary name</p>
+                    <a href="#inscribe" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6D Meta Section -->
+    <section id="sixd-meta">
+        <div class="container">
+            <div class="section-header">
+                <h2>6D Meta</h2>
+                <p>6-digit .btc names from 000000.btc to 999999.btc</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3>Digital Identity</h3>
+                    <p>Unique 6-digit identities permanently stored on Bitcoin blockchain</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Free Mint</h3>
+                    <p>All 6D.btc domains can be minted free using "First is First" rule</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Blockchain Mapping</h3>
+                    <p>Each 6D.btc officially maps to Bitcoin blocks in the metaverse</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>Technical Support</h3>
+                    <p>Powered by BDID infrastructure for seamless integration</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Permanent Record</h3>
+                    <p>Once inscribed, your 6D identity exists forever on Bitcoin</p>
+                </div>
+                
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Designed for high-performance blockchain interactions</p>
+                </div>
+            </div>
+            
+            <div class="cta-container" style="margin-top: 50px;">
+                <a href="https://bdid.io/bulkreg?tab=6DMeta" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-pen"></i> Mint Your 6D Domain
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>Top Use Cases</h2>
+                <p>Revolutionary applications for .btc domains</p>
+            </div>
+            
+            <div class="use-cases-grid">
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-wallet"></i> Simplified Payments</h3>
+                    <p>Use your .btc domain as a payment address instead of complex wallet addresses</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-lock"></i> Permanent Websites</h3>
+                    <p>Host content on Bitcoin, immune to censorship and takedowns</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-id-card"></i> Digital Identity</h3>
+                    <p>A Web3 username for your brand across platforms</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-bolt"></i> Direct Crypto Payments</h3>
+                    <p>Fast, low-cost wallet transactions via your domain</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-gift"></i> Exclusive Marketing</h3>
+                    <p>Distribute NFTs and exclusive content via your .btc domain</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-shield-alt"></i> Brand Protection</h3>
+                    <p>Secure your brand's identity in the Web3 space</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-envelope"></i> Email Addresses</h3>
+                    <p>Create memorable email addresses (you@brand.btc)</p>
+                </div>
+                
+                <div class="use-case-card fade-in">
+                    <h3><i class="fas fa-server"></i> Decentralized Websites</h3>
+                    <p>Host on IPFS with .btc domain resolution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketplaces Section -->
+    <section id="marketplaces">
+        <div class="container">
+            <div class="section-header">
+                <h2>Marketplaces</h2>
+                <p>Buy your .btc domain from trusted platforms</p>
+            </div>
+            
+            <div class="marketplace-grid">
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Magic Eden</h3>
+                    <p>Largest NFT marketplace</p>
+                    <a href="https://magiceden.io/ordinals/marketplace/btc-name" target="_blank" class="btn btn-primary">Buy Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>OKX</h3>
+                    <p>Leading crypto exchange</p>
+                    <a href="https://okx.com/web3/marketplace/nft/collection/btc/btcname" target="_blank" class="btn btn-primary">Buy Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3>IDClub</h3>
+                    <p>Specialized domain marketplace</p>
+                    <a href="https://idclub.io/market/domain/domain_btc" target="_blank" class="btn btn-primary">Buy Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>UniSat</h3>
+                    <p>Popular Bitcoin wallet</p>
+                    <a href="https://unisat.io/market/names?dt=btc" target="_blank" class="btn btn-primary">Buy Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>BDID</h3>
+                    <p>Specialized .btc domain</p>
+                    <a href="https://bdid.io/marketplace/inscription?namespace=.btc" target="_blank" class="btn btn-primary">Buy Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Element</h3>
+                    <p>Multi-chain NFT marketplace</p>
+                    <a href="https://element.market/collections/btc-names" target="_blank" class="btn btn-primary">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inscribe Section -->
+    <section id="inscribe" style="background-color: rgba(30,30,30,0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Inscribe Your .btc Domain</h2>
+                <p>Permanently etch your domain onto the Bitcoin blockchain</p>
+            </div>
+            
+            <div class="platform-grid">
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>BDID</h3>
+                    <p>Specialized .btc inscription service</p>
+                    <a href="https://bdid.io/bulkreg" target="_blank" class="btn btn-secondary">Inscribe Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3>IDClub</h3>
+                    <p>Domain-focused inscription platform</p>
+                    <a href="https://idclub.io/bulkreg" target="_blank" class="btn btn-secondary">Inscribe Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>UniSat</h3>
+                    <p>Popular Bitcoin wallet</p>
+                    <a href="https://unisat.io/inscribe" target="_blank" class="btn btn-secondary">Inscribe Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>6D Meta Mint Map</h3>
+                    <p>Specialized for 6D domains</p>
+                    <a href="https://bdid.io/bulkreg?tab=6DMeta" target="_blank" class="btn btn-secondary">Inscribe Now</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Ordx</h3>
+                    <p>Comprehensive inscription</p>
+                    <a href="https://ordx.market/inscribe" target="_blank" class="btn btn-secondary">Inscribe Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community">
+        <div class="container">
+            <div class="section-header">
+                <h2>Join Our Community</h2>
+                <p>Connect with the .btc domain ecosystem</p>
+            </div>
+            
+            <div class="platform-grid">
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h3>Twitter</h3>
+                    <p>Follow for updates and news</p>
+                    <a href="https://twitter.com/btcname_DID" target="_blank" class="btn btn-tertiary">Follow</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Community discussion group</p>
+                    <a href="https://t.me/buer01" target="_blank" class="btn btn-tertiary">Join</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3>Discord</h3>
+                    <p>Connect with developers</p>
+                    <a href="https://discord.gg/eNERqJU85x" target="_blank" class="btn btn-tertiary">Join</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>DeBox</h3>
+                    <p>DeBox community group</p>
+                    <a href="https://m.debox.pro/group?id=hbuehul9" target="_blank" class="btn btn-tertiary">Join</a>
+                </div>
+                
+                <div class="platform-card fade-in">
+                    <div class="platform-logo">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <p>Open-source development</p>
+                    <a href="https://github.com/BtcName/BtcName" target="_blank" class="btn btn-tertiary">Contribute</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="#" class="logo">
+                        <span>.btc</span>
+                    </a>
+                    <p style="margin-top: 20px; color: var(--text-secondary);">The future of decentralized digital identity on Bitcoin.</p>
+                    <div style="display: flex; gap: 12px; margin-top: 20px;">
+                        <a href="https://twitter.com/btcname_DID" target="_blank" class="btn btn-secondary" style="padding: 10px 15px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://t.me/buer01" target="_blank" class="btn btn-secondary" style="padding: 10px 15px;">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://discord.gg/eNERqJU85x" target="_blank" class="btn btn-secondary" style="padding: 10px 15px;">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://docs.btcname.id/" target="_blank"><i class="fas fa-book"></i> Documentation</a></li>
+                        <li><a href="https://github.com/BtcName/BtcName" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Whitepaper</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Marketplaces</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://magiceden.io/ordinals/marketplace/btc-name" target="_blank"><i class="fas fa-gem"></i> Magic Eden</a></li>
+                        <li><a href="https://okx.com/web3/marketplace/nft/collection/btc/btcname" target="_blank"><i class="fas fa-exchange-alt"></i> OKX</a></li>
+                        <li><a href="https://idclub.io/market/domain/domain_btc" target="_blank"><i class="fas fa-id-card"></i> IDClub</a></li>
+                        <li><a href="https://unisat.io/market/names?dt=btc" target="_blank"><i class="fas fa-satellite"></i> UniSat</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Inscription Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://bdid.io/bulkreg" target="_blank"><i class="fas fa-database"></i> BDID</a></li>
+                        <li><a href="https://idclub.io/bulkreg" target="_blank"><i class="fas fa-id-card"></i> IDClub</a></li>
+                        <li><a href="https://unisat.io/inscribe" target="_blank"><i class="fas fa-satellite"></i> UniSat</a></li>
+                        <li><a href="https://ordx.market/inscribe" target="_blank"><i class="fas fa-layer-group"></i> Ordx</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2025 .btc. All rights reserved. | Truly decentralized digital identity on Bitcoin
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 120)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Initialize animations on load
+        window.addEventListener('load', () => {
+            // Animate hero elements with delays
+            const heroElements = document.querySelectorAll('.hero h1, .hero p, .hero-buttons, .stat-item');
+            heroElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>
